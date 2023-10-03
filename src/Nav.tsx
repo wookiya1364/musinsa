@@ -16,10 +16,10 @@ interface NavProps {
 const SearchFilter = React.forwardRef<HTMLDivElement, { data: TMSSGoods[], activeFilters: string[], onFilterChange: (filters: string[]) => void; }>(
   ({ data, activeFilters, onFilterChange }, ref) => {
     return (
-      <Column ref={ref} className="overflow-auto cursor-pointer">
+      <Column ref={ref} className="overflow-auto">
         {data?.map((item: TMSSGoods, idx: number) => (
           <Column key={idx} 
-          className="w-full border-b-[1px] border-slate-200 items-start"
+          className="w-full border-b-[1px] border-slate-200 items-start cursor-pointer"
             onClick={() => {
             const newFilter = [
               ...new Set([...activeFilters, item.goodsName]),

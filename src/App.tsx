@@ -136,7 +136,7 @@ const App = React.memo(({ activeFilters }: AppProps) => {
     const observer = new IntersectionObserver(
       (entries: IntersectionObserverEntry[]) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting && !loading && hasMore) {
+          if (entry.isIntersecting) {
             // 페이지 하단에 도달하면 데이터 더 불러오기 & 프로그래스바 감추기
             invisibleLoader();
             fetchMoreData();
