@@ -2,7 +2,7 @@ import { Column } from "@atom/column";
 import { Label } from "@atom/label";
 import { Row } from "@atom/row";
 import { TContainerRender, TDefaultProps, TItemImage } from "@comptypes/type";
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 
 export interface ItemProps extends React.ObjectHTMLAttributes<HTMLDivElement> {
   as?: TContainerRender;
@@ -27,7 +27,28 @@ const Itemlist = React.forwardRef<HTMLDivElement, ItemProps>(
   }
 );
 
+const SkeletonImage = ({ isSoldOut }: { isSoldOut: boolean }) => {
+  return (
+    <>
+      {isSoldOut ? (
+        <Row className="w-[45vw] max-w-[500px] h-[45vw] max-h-[500px] overflow-hidden">
+          <Row className="w-full h-full img-skeleton">
+            <Label className="flex w-[45%] justify-center absolute text-[20px] leading-[22px] text-[#777777]">
+              SOLD OUT
+            </Label>
+          </Row>
+        </Row>
+      ) : (
+        <Row className="w-[45vw] max-w-[500px] h-[45vw] max-h-[500px] overflow-hidden">
+          <Row className="w-full h-full img-skeleton"></Row>
+        </Row>
+      )}
+    </>
+  );
+};
+
 const ImageLoader = ({ className, item }: TItemImage) => {
+  const [isLoading, setIsLoading] = useState(true);
   const handleErrorImage = useCallback(
     (el: React.SyntheticEvent<HTMLImageElement, Event>) => {
       const img = el.target as HTMLImageElement;
@@ -38,12 +59,38 @@ const ImageLoader = ({ className, item }: TItemImage) => {
   );
 
   return (
-    <img
-      className={className}
-      src={item.imageUrl}
-      alt={item.goodsName}
-      onError={handleErrorImage}
-    />
+    <>
+      {isLoading ? <SkeletonImage isSoldOut={item.isSoldOut} /> : null}
+      {item.isSoldOut ? (
+        <Row className="justify-center">
+          {isLoading ? null : (
+            <Label className="absolute text-[20px] leading-[22px] text-[#777777]">
+              SOLD OUT
+            </Label>
+          )}
+
+          <img
+            className={`opacity-30 ${className}`}
+            src={item.imageUrl}
+            alt={item.goodsName}
+            onError={handleErrorImage}
+            onLoad={() => {
+              setIsLoading(false);
+            }}
+          />
+        </Row>
+      ) : (
+        <img
+          className={className}
+          src={item.imageUrl}
+          alt={item.goodsName}
+          onError={handleErrorImage}
+          onLoad={() => {
+            setIsLoading(false);
+          }}
+        />
+      )}
+    </>
   );
 };
 
@@ -58,16 +105,7 @@ const ItemImage = ({ children, className, item }: TItemImage) => {
         className="w-full overflow-hidden cursor-pointer h-[50vw] max-w-[500px] max-h-[500px]"
         onClick={() => window.open(item.linkUrl)}
       >
-        {item.isSoldOut ? (
-          <Row className="justify-center">
-            <Label className="absolute text-[20px] leading-[22px] text-[#777777]">
-              SOLD OUT
-            </Label>
-            <ImageLoader item={item} className={`opacity-30 ${className}`} />
-          </Row>
-        ) : (
-          <ImageLoader item={item} className={className} />
-        )}
+        <ImageLoader item={item} className={className} />
       </Column>
       {item.isExclusive ? (
         <Row className="w-full relative top-[-10px] left-[10px] items-start">
@@ -160,4 +198,5 @@ export {
   ItemBrandName,
   ItemGoodsName,
   ItemPriceContainer,
+  SkeletonImage,
 };

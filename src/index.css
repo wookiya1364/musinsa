@@ -43,8 +43,23 @@
 
 .max-text-line {
   display: -webkit-box;
-  -webkit-line-clamp: 2; /* 최대 표시할 줄 수 */
+  -webkit-line-clamp: 2;
+  /* 최대 표시할 줄 수 */
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+@keyframes imgLoading {
+  100% {
+    background-position: -100% 0;
+  }
+}
+
+.img-skeleton {
+  background: linear-gradient(120deg, #e5e5e5 30%, #f0f0f0 38%, #f0f0f0 40%, #e5e5e5 48%);
+  border-radius: 1rem;
+  background-size: 200% 100%;
+  background-position: 100% 0;
+  animation: imgLoading 1s infinite;
 }
