@@ -7,6 +7,8 @@
 |개발|1. yarn dev<br/>2. 크롬 브라우저에서 [http://localhost:5173](http://localhost:5173)|
 |프로덕션|1. yarn build<br/>2. yarn preview<br/>3. 크롬 브라우저에서 [http://localhost:4173](http://localhost:4173)|
 
+### 1분16초 앱 사용 gif
+![mss](https://github.com/wookiya1364/musinsa/assets/16011536/2c4d6627-e640-4033-a62a-730502dbbff8)
 
 # 구성
 #### 무신사 사전과제: React + TypeScript
