@@ -72,6 +72,15 @@
 |--|--|
 |type.ts|재사용 타입 선언 파일|
 
+## src
+|파일|설명|
+|--|--|
+|Header.tsx|MUSINSA 로고 나타내기 위한 파일|
+|Nav.tsx|검색을 위한 필터링 파일|
+|App.tsx|무한스크롤이 포함된 상품리스트 파일|
+|main.tsx|Header, Nav, App을 조합한 메인 앱 구동 파일|
+|index.css|글로벌 css 파일|
+
 
 ## 환경설정
 vite.config.ts
