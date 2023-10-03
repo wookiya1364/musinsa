@@ -1,5 +1,5 @@
 # 구동 방법
-1. git clone 
+1. git clone https://github.com/wookiya1364/musinsa.git
 2. yarn
 
 |환경|설명|
