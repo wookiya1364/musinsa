@@ -23,6 +23,7 @@
       - search.tsx
    - types
       - type.ts
+   - cn.ts
 - src
    - App.tsx
    - Header.tsx
@@ -76,7 +77,7 @@
 vite.config.ts
 - tsconfigPaths 사용
    - tsconfig.json에 paths 명시 (채택)
-   - ~~vite.config.ts에 resovle 명시~~ (미채택)
+   - ~~vite.config.ts에 resovle 명시~~ 일반적으로 사용하는 방법이 아니므로 (미채택)
 
 
 # 선정 이유
